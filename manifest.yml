@@ -1,6 +1,5 @@
 ---
 applications:
-- name: cf-spring
+- name: cf-spring-devoxx
   memory: 512M
   instances: 1
-  random-route: true
