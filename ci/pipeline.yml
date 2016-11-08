@@ -1,0 +1,26 @@
+---
+jobs:
+- name: deploy-to-cf
+  plan:
+  - get: cf-sample-app-spring
+    trigger: true
+  - put: deployment
+    params:
+      manifest: cf-sample-app-spring/manifest.yml
+      path: cf-sample-app-spring/app.groovy
+
+resources:
+- name: cf-sample-app-spring
+  type: git
+  source:
+    uri: https://github.com/avade/cf-sample-app-spring
+
+- name: deployment
+  type: cf
+  source:
+    api: {{cfapi}}
+    username: {{cfemail}}
+    password: {{cfpassword}}
+    organization: {{cforg}}
+    space: {{cfspace}}
+    skip_cert_check: true
